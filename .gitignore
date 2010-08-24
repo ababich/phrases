@@ -3,6 +3,7 @@ log/
 tmp/
 coverage/
 doc/app/*
+database.yml
 db/schema.sql
 *~
 *.swn
