@@ -1,0 +1,17 @@
+.DS_Store
+log/
+tmp/
+coverage/
+doc/app/*
+db/schema.sql
+*~
+*.swn
+*.swo
+*.swp
+*.orig
+.generators
+.rakeTasks
+nbproject/
+rerun.txt
+metrics/*
+TAGS
