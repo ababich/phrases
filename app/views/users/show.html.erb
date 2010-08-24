@@ -4,6 +4,11 @@
 </p>
 
 <p>
+  <b>Default language:</b>
+  <%=h (@user.default_language ? @user.default_language.name : "was not set") %>
+</p>
+
+<p>
   <b>Login count:</b>
   <%=h @user.login_count %>
 </p>

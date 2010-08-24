@@ -5,5 +5,5 @@ class User < ActiveRecord::Base
 
   #Model relationship
   has_and_belongs_to_many :languages
-  has_one                 :default_language, :class_name => "Language"
+  belongs_to              :default_language, :class_name => "Language"
 end
