@@ -1,8 +1,11 @@
-<%= form.label :login %><br />
-<%= form.text_field :login, :disabled => true %><br />
-<br />
 <%= form.label :password, form.object.new_record? ? nil : "Change password" %><br />
 <%= form.password_field :password %><br />
 <br />
 <%= form.label :password_confirmation %><br />
 <%= form.password_field :password_confirmation %><br />
+<br/>
+Default language:
+<% Language.all.each do |lang| %>
+  <%= form.radio_button :default_language_id, lang.id %>
+  <%= lang.name %>
+<%  end %><br /><br />
