@@ -1,0 +1,37 @@
+div.phrase {
+  width: 400px;
+  height: 18px;
+}
+
+div.phrase div {
+  margin: 1px;
+  height: 18px;
+  float: left;
+}
+
+div.phrase div.user {
+  width: 40px;
+  background-color: #ffa;
+}
+
+div.phrase div.language {
+  width: 18px;
+  background-color: #afa;
+}
+
+div.phrase div.text {
+  width: 318px;
+  background-color: #eee;
+}
+
+div.phrase div.phrase_edit {
+  width: 16px;
+  background-color: #aaf;
+  text-align: center;
+  vertical-align: top;
+}
+
+div.phrase div.edit a {
+  color: white;
+  font-weight: bold;
+}

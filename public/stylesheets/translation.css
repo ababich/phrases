@@ -1,0 +1,37 @@
+
+div.translation {
+  width: 874px;
+  height: 20px;
+  background-color: #fef;
+  margin: 2px;
+}
+
+div.translation div {
+  height: 18px;
+  float: left;
+}
+
+div.translation div.edit {
+  margin: 1px;
+  width: 16px;
+  background-color: #faf;
+  text-align: center;
+  vertical-align: top;
+}
+
+div.translation div.user {
+  margin: 1px;
+  width: 40px;
+  background-color: #ffa;
+}
+
+div.translation div.phrase_box {
+  width: 400px;
+}
+
+div.translation div.arrow {
+  margin: 1px;
+  width: 12px;
+  font-weight: bold;
+  color: black;
+}

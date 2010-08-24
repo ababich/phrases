@@ -1,0 +1,11 @@
+<p>
+  Hello, <b><%=h @user.login %></b>
+</p>
+
+<% unless @user.default_language %>
+  <p>Please note, that your default language <b>was not set</b>! <%= link_to 'Edit settings...', edit_account_path %></p>
+<% end %>
+
+<% Translation.all.each do |t| %>
+  <%= render :partial => "translations/translation", :locals => {:translation => t, :show_user => true} %>
+<% end %>

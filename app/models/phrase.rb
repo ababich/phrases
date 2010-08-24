@@ -5,8 +5,7 @@ class Phrase < ActiveRecord::Base
   belongs_to :user # who suggests phrase
 
   belongs_to :language
-
-
+  validates_presence_of :language, :user, :text
 
   # Translate methods
   def save_translation_to_lang_with_text(lang, text, user = nil)
@@ -38,7 +37,7 @@ class Phrase < ActiveRecord::Base
     lang = Language.named lang
     return self if self.language == lang
 
-    #slow method, should be replaced with direct AR.find-family constructions if DB is big
+    # TODO: slow method, should be replaced with direct AR.find-family constructions if DB is big
     self.translation_phrases.detect { |p| p.language == lang }
   end
 

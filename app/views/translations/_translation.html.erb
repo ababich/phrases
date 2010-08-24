@@ -1,0 +1,26 @@
+<%
+# defaults
+
+show_user ||= false
+%>
+
+<div class="translation" id="translation_<%= translation.id %>">
+  <div class="edit">
+    <%= link_to "e", translation_path(translation) %>
+  </div>
+  <% if show_user %>
+    <div class="user">
+      <%= translation.user.login %>
+    </div>
+  <% end %>
+  <div class="phrase_box">
+    <%= render :partial => "phrases/phrase", :locals => {:phrase => translation.source, :show_user => show_user} %>
+  </div>
+  <div class="arrow">
+    &raquo;
+  </div>
+  <div class="phrase_box">
+    <%= render :partial => "phrases/phrase", :locals => {:phrase => translation.target, :show_user => show_user} %>
+  </div>
+</div>
+<%= clear_div %>

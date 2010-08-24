@@ -8,8 +8,8 @@ class Translation < ActiveRecord::Base
   belongs_to :source, :class_name => "Phrase"
   belongs_to :target, :class_name => "Phrase"
 
-  has_one :user # who suggests translation pair
-
+  belongs_to :user # who suggests translation pair
+  validates_presence_of :source, :target, :user
 
   # after_create twin
   def after_create

@@ -1,0 +1,23 @@
+<%
+# defaults
+
+show_user ||= false
+%>
+
+<div class="phrase" id="phrase_<%= phrase.id %>">
+  <div class="phrase_edit">
+    <%= link_to "e", phrase_path(phrase) %>
+  </div>
+  <% if show_user %>
+    <div class="user">
+      <%= phrase.user.login %>
+    </div>
+  <% end %>
+  <div class="language">
+    <%= phrase.language.name %>
+  </div>
+  <div class="text">
+    <%= phrase.text %>
+  </div>
+</div>
+<%= clear_div %>
