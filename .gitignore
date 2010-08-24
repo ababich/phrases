@@ -3,6 +3,7 @@ log/
 tmp/
 coverage/
 doc/app/*
+schema.rb
 database.yml
 db/schema.sql
 *~
