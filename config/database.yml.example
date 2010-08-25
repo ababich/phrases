@@ -2,7 +2,7 @@
 #   gem install sqlite3-ruby (not necessary on OS X Leopard)
 development: &COMMON
   adapter: mysql
-  database: phrases_test
+  database: phrases_dev
   username: root
   password: 
   host: 127.0.0.1
@@ -16,5 +16,6 @@ test:
   username: root
   password: 
   host: 127.0.0.1
+
 production:
   <<: *COMMON

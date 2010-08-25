@@ -1,11 +1,12 @@
 class Phrase < ActiveRecord::Base
   #Model relationship
-  has_many :translations, :foreign_key => "source_id"
+  has_many :translations, :foreign_key => "source_id", :dependent => :destroy
 
   belongs_to :user # who suggests phrase
 
   belongs_to :language
   validates_presence_of :language, :user, :text
+
 
   # Translate methods
   def save_translation_to_lang_with_text(lang, text, user = nil)

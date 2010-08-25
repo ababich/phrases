@@ -1,0 +1,15 @@
+<p>
+  <b>Translation</b>
+  <%= render :partial => "translations/translation", :locals => {:translation => @translation, :show_user => true} %>
+</p>
+
+<p>
+  Its twin
+  <%= render :partial => "translations/translation", :locals => {:translation => @twin, :show_user => true} %>
+</p>
+
+<br /><br />
+
+<b>
+  <%= link_to "Remove both translations", translation_url, :confirm => "Are you sure?", :method => 'delete' %>
+</b>

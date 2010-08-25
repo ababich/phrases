@@ -1,0 +1,39 @@
+<%
+
+target ||= "" # url for form result
+label ||= "perform" #submit button label
+
+# this makes search partial a bit overloaded but in general functionality should be gathered in one place
+except_languages ||= [] #used for translation suggestions
+source ||= nil #used for translation creation also creates translation link for variants
+
+%>
+
+<div id="search">
+  <% form_tag target, :id => 'search_form' do %>
+    <% lang = 0
+    lang = @user.default_language.id if @user.default_language
+    select_options = options_from_collection_for_select(Language.all - except_languages, 'id', 'name', lang) %>
+    <%= select_tag 'search[language]', select_options %>
+
+
+    <%= text_field_tag 'search[phrase]', '', :size => 42, :maxlength => 100 %>
+    
+    <%= hidden_field_tag 'search[translation_source]', source.id if source  %>
+
+    <%= submit_tag label, :id=>"search_add_phrase", :style => "display: none;" %>
+
+
+    <%= observe_field :search_phrase, :url => { :action => :live_search },
+      :frequency => 0.5,
+      :with => "$('search_form').serialize()"
+  %>
+    <%= observe_field :search_language, :url => { :action => :live_search },
+      :with => "$('search_form').serialize()"
+  %>
+  <% end  %>
+  <br />
+
+  <div id="search_variants" class="search_variants">
+  </div>
+</div>

@@ -21,6 +21,12 @@ class Translation < ActiveRecord::Base
     end
   end
 
+  #destroy twin after create
+  def after_destroy
+    twin = Translation.first(:conditions =>
+        {:source_id => self.target.id, :target_id => self.source.id})
+    twin.destroy if twin #avoid cycling
+  end
 
 
   # Existence public class method

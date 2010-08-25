@@ -6,7 +6,7 @@ show_user ||= false
 
 <div class="translation" id="translation_<%= translation.id %>">
   <div class="edit">
-    <%= link_to "e", translation_path(translation) %>
+    <%= link_to "e", edit_translation_path(translation) %>
   </div>
   <% if show_user %>
     <div class="user">

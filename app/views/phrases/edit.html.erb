@@ -1,0 +1,40 @@
+<p>
+  <b>For phrase</b>
+  <%= render :partial => "phrases/phrase", :locals => {:phrase => @phrase, :show_user => true} %>
+</p>
+
+<p>
+  <% if @translations.empty? %>
+    We have no translations!
+  <%  else %>
+    We have next translations:
+
+    <% @translations.each do |tr| %>
+      <div>
+        <div style="float: left">
+          <%= render :partial => "phrases/phrase", :locals => {:phrase => tr.target} %>
+        </div>
+        <div style="float: left">
+          <%= link_to "edit translation", edit_translation_path(tr) %>
+        </div>
+        <%= clear_div %>
+      </div>
+    <% end %>
+  <% end %>
+</p>
+
+<br /><br />
+Suggest a translation: <br />
+<%= render :partial => 'phrases/search', :locals => {
+  :target => new_translation_path,
+  :label => "Suggest a translation",
+  :except_languages => [@phrase.language] + @translations.map(&:target).map(&:language),
+  :source => @phrase
+} %>
+
+
+<br /><br />
+
+<b>
+  <%= link_to "Remove the phrase", phrase_url, :confirm => "Are you sure?", :method => 'delete' %>
+</b>

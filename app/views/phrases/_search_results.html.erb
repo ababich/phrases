@@ -1,0 +1,43 @@
+<%
+# defaults
+
+phrases ||= []
+show_user ||= false #put deeper
+more ||= false #shows "More..." label
+source ||= nil #means we need a link for translation creation
+
+%>
+
+<% phrases.each do |phrase| %>
+
+  <% if source #different branch for readability
+
+    params = {:search => {
+        :translation_source => source,
+        :translation_target => phrase.id
+      }
+    }.to_param
+
+  %>
+
+    <div>
+      <div style="float: left;">
+        <%= render :partial => "/phrases/phrase", :locals => {:phrase => phrase, :show_user => show_user} %>
+      </div>
+      <div style="float: left;">
+        <%= link_to 'confirm translation', new_translation_url + "?#{params}", :method=>"post" %>
+      </div>
+      <%= clear_div %>
+    </div>
+
+  <% else %>
+
+    <%= render :partial => "/phrases/phrase", :locals => {:phrase => phrase, :show_user => show_user} %>
+
+  <% end %>
+
+<% end %>
+
+<% if more %>
+  And more.. longer search string => less search results
+<% end %>

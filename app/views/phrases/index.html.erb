@@ -6,6 +6,12 @@
   <p>Please note, that your default language <b>was not set</b>! <%= link_to 'Edit settings...', edit_account_path %></p>
 <% end %>
 
+
+Search: <br />
+<%= render :partial => 'phrases/search', :locals => {:target => new_phrase_path, :label => "Add new phrase"} %>
+
+<br /><br />
+
 <% Translation.all.each do |t| %>
   <%= render :partial => "translations/translation", :locals => {:translation => t, :show_user => true} %>
 <% end %>
