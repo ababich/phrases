@@ -1,4 +1,6 @@
-== Phrases 
+== Phrases
+
+Short description
 
 === Technical requirements
 
@@ -31,3 +33,70 @@ rake db:rebuild #custom task which makes drop-create-migrate-seed sequence
 
 NOTE: seed.rb contains only limited amount of preloaded languges not to bloat DB, but if you want to
 add more - do it in seed.rb in case App has no admin UI
+
+
+
+=== How it works
+
+Only registered users can work with the app, so you have to register (requirements: 3-char login and 4-char pass)
+During the registration or on account setup page you can select user's default language which will be default for the search
+
+On the index you can see:
+ * Search panel
+ * Five oldest phrases w/o translations (like a query to translate)
+ * Five recent phrases
+ * Ten recent translations (including twins)
+
+While partials are heavily reused from any place you can goto entity (Phrase or Translation) editing
+
+
+==== Search
+
+Search suggestions are highlighted AJAXically (periodically scan changes with 0.5sec frequency)
+
+If your current input is new for current language "Add new phrase" button appears
+
+If you click on "e" link from suggestions you'll go to phrase editing page (with ability to suggest translation)
+
+At any case you can hit Enter and if your phrase is new it'll be created and you'll go to editing page
+for this new phrase in other case you'll enter editing page for already existed phrase (both language and input text matter)
+
+Search works similar in all cases, in some cases each row has additional functionality
+
+Search gives form action as a param that why you can pass search results to a controller's action in
+pretty the same manner like methods returns smth to their callers
+
+
+==== Phrases
+
+Phrase can be removed (with all associated Translations)
+
+Phrase show and edit pages are the same
+
+Phrase edit page allows to suggest a translation using Search interface (see above)
+The only difference is that you have links to "commit translation" and if you hit Enter App will silently
+find match phrase (or create a new one) and redirect you to newly created Translation page
+
+
+=== Translations
+
+AR has now core functionality to make efficient Phrase-to-Phrase association
+So, I've introduced Translation model to work with this associations
+The only special thing is that every object has its twin.
+
+This means that if we translate Phrase1(Lang1) to Phrase2(Lang2) we always create
+symmetric translation: Phrase2(Lang2) to Phrase1(Lang1)
+
+Twins are created and destroyed together
+
+Translation page contains Translation twin, you can destroy any of them (second will be destroyed automatically)
+
+
+
+== Known issues
+
+"e" edit links are sometimes confusing (for translations representation)
+
+Multi-byte phrases was not deeply tested but works at first glance
+
+UI is stuck to string and font sizes in pixels, which is not flexible and can fail on large strings

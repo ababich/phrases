@@ -6,6 +6,6 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
 
-%w{ru en ua aa ab af ak sq am ar an}.each do |lang|
+%w{ru en ua}.each do |lang|
   Language.create!({:name => lang})
 end

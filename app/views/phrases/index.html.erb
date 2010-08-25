@@ -12,6 +12,36 @@ Search: <br />
 
 <br /><br />
 
-<% Translation.all.each do |t| %>
+Five oldest phrases w/o translations:
+<%
+  ps = Phrase.all(
+    :limit => 5,
+    :order => "created_at",
+    :joins => "LEFT JOIN `translations` ON `translations`.source_id = `phrases`.id",
+    :group => "`phrases`.id",
+    :having => "count(`translations`.id) = 0"
+  )
+
+  ps.each do |p| %>
+  <%= render :partial => "phrases/phrase", :locals => {:phrase => p, :show_user => true} %>
+<% end %>
+
+<br /><br />
+
+Five recent phrases:
+<%
+  ps = Phrase.all(:limit => 5, :order => "created_at DESC")
+
+  ps.each do |p| %>
+  <%= render :partial => "phrases/phrase", :locals => {:phrase => p, :show_user => true} %>
+<% end %>
+
+<br /><br />
+
+Ten latest translations:
+<%
+  trans = Translation.all(:limit => 10, :order => "created_at DESC")
+
+  trans.each do |t| %>
   <%= render :partial => "translations/translation", :locals => {:translation => t, :show_user => true} %>
 <% end %>
