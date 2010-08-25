@@ -7,13 +7,13 @@ class Language < ActiveRecord::Base
   has_and_belongs_to_many :users
 
 
-  def self.named(lang)
-    unless lang.is_a? Language
-      lang = Language.find_by_name lang
-
-      raise ArgumentError, "cannot work with specified language" unless lang
-    end
-
-    lang
-  end
+#  def self.named(lang)
+#    unless lang.is_a? Language
+#      lang = Language.find_by_name lang
+#
+#      raise ArgumentError, "cannot work with specified language" unless lang
+#    end
+#
+#    lang
+#  end
 end

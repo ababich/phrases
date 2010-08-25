@@ -32,7 +32,7 @@ class Translation < ActiveRecord::Base
   # Existence public class method
   def self.for?(phrase_a, phrase_b)
     raise ArgumentError, "requires Phrases as params" unless phrase_a.is_a?(Phrase) && phrase_b.is_a?(Phrase)
-    
+
     Translation.first(:conditions => {:source_id => phrase_a, :target_id => phrase_b})
   end
 end

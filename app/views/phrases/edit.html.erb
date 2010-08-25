@@ -10,17 +10,17 @@
     We have next translations:
 
     <% @translations.each do |tr| %>
-      <div>
-        <div style="float: left">
-          <%= render :partial => "phrases/phrase", :locals => {:phrase => tr.target} %>
-        </div>
-        <div style="float: left">
-          <%= link_to "edit translation", edit_translation_path(tr) %>
-        </div>
-        <%= clear_div %>
+    <div>
+      <div style="float: left">
+        <%= render :partial => "phrases/phrase", :locals => {:phrase => tr.target} %>
       </div>
-    <% end %>
+      <div style="float: left">
+        <%= link_to "edit translation", edit_translation_path(tr) %>
+      </div>
+      <%= clear_div %>
+    </div>
   <% end %>
+<% end %>
 </p>
 
 <br /><br />

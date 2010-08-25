@@ -14,15 +14,15 @@ Search: <br />
 
 Five oldest phrases w/o translations:
 <%
-  ps = Phrase.all(
-    :limit => 5,
-    :order => "created_at",
-    :joins => "LEFT JOIN `translations` ON `translations`.source_id = `phrases`.id",
-    :group => "`phrases`.id",
-    :having => "count(`translations`.id) = 0"
-  )
+ps = Phrase.all(
+  :limit => 5,
+  :order => "created_at",
+  :joins => "LEFT JOIN `translations` ON `translations`.source_id = `phrases`.id",
+  :group => "`phrases`.id",
+  :having => "count(`translations`.id) = 0"
+)
 
-  ps.each do |p| %>
+ps.each do |p| %>
   <%= render :partial => "phrases/phrase", :locals => {:phrase => p, :show_user => true} %>
 <% end %>
 
@@ -30,9 +30,9 @@ Five oldest phrases w/o translations:
 
 Five recent phrases:
 <%
-  ps = Phrase.all(:limit => 5, :order => "created_at DESC")
+ps = Phrase.all(:limit => 5, :order => "created_at DESC")
 
-  ps.each do |p| %>
+ps.each do |p| %>
   <%= render :partial => "phrases/phrase", :locals => {:phrase => p, :show_user => true} %>
 <% end %>
 
@@ -40,8 +40,8 @@ Five recent phrases:
 
 Ten latest translations:
 <%
-  trans = Translation.all(:limit => 10, :order => "created_at DESC")
+trans = Translation.all(:limit => 10, :order => "created_at DESC")
 
-  trans.each do |t| %>
+trans.each do |t| %>
   <%= render :partial => "translations/translation", :locals => {:translation => t, :show_user => true} %>
 <% end %>

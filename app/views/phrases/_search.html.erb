@@ -18,7 +18,7 @@ source ||= nil #used for translation creation also creates translation link for 
 
 
     <%= text_field_tag 'search[phrase]', '', :size => 42, :maxlength => 100 %>
-    
+
     <%= hidden_field_tag 'search[translation_source]', source.id if source  %>
 
     <%= submit_tag label, :id=>"search_add_phrase", :style => "display: none;" %>

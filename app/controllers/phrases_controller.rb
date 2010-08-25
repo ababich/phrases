@@ -3,13 +3,10 @@ class PhrasesController < ApplicationController
 
   before_filter :require_user
   before_filter :set_phrase, :only => [:edit, :show, :destroy]
+  before_filter :set_lang_text, :only => [:new, :live_search]
 
   def new
-    s_params = params["search"]
-    lang = s_params["language"]
-    text = s_params["phrase"]
-
-    conds = {:language_id => lang, :text => text}
+    conds = {:language_id => @lang, :text => @text}
 
     phrase = Phrase.first(:conditions => conds) ||
       Phrase.create!(conds.merge({:user => @user}))
@@ -29,15 +26,11 @@ class PhrasesController < ApplicationController
   end
 
   def live_search
-    s_params = params["search"]
-    lang = s_params["language"]
-    sample = s_params["phrase"]
-    
     phrases = []
-    language = Language.find_by_id(lang)
+    language = Language.find_by_id(@lang)
     
-    if language && !sample.empty?
-      phrases = Phrase.all :conditions => ["language_id = ? and text like ?", lang, "#{sample}%"],
+    if language && !@text.empty?
+      phrases = Phrase.all :conditions => ["language_id = ? and text like ?", @lang, "#{@text}%"],
         :limit => SEARCH_OUTPUT_LIMIT + 1
     end
 
@@ -50,9 +43,9 @@ class PhrasesController < ApplicationController
           :locals  => {
             :phrases => phrases.first(SEARCH_OUTPUT_LIMIT),
             :more => (phrases.length > SEARCH_OUTPUT_LIMIT),
-            :source => s_params["translation_source"]}
+            :source => @s_params["translation_source"]}
 
-          if sample.empty? || Phrase.exists?({:language_id => lang, :text => sample})
+          if @text.empty? || Phrase.exists?({:language_id => @lang, :text => @text})
             page.hide('search_add_phrase')
           else
             page.show('search_add_phrase')
@@ -70,4 +63,11 @@ class PhrasesController < ApplicationController
     @phrase = Phrase.find params["id"]
     @translations = @phrase.translations
   end
+
+  def set_lang_text
+    @s_params = params["search"]
+    @lang = @s_params["language"]
+    @text = @s_params["phrase"]
+  end
+
 end
